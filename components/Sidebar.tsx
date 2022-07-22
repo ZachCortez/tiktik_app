@@ -46,7 +46,21 @@ const Sidebar = () => {
                                 Log in to like and comment on videos
                             </p>
                             <div className='pr-4'>
-                                {/* GoogleLogin */}
+                                <GoogleLogin 
+                                    clientId=''
+                                    render={(renderProps)=> (
+                                        <button
+                                        className='bg-white text-lg text-[#F51997] border-[1px] border-[#F51997] font-semibold px-6 py-3 rounded-md outline-none w-full mt-3'
+                                        onClick={renderProps.onClick}
+                                        disabled={renderProps.disabled}
+                                        >
+                                            Log In
+                                        </button>
+                                    )}
+                                    onSuccess={() => {}}
+                                    onFailure={() => {}}
+                                    cookiePolicy="single-host-origin"
+                                />
                             </div>
                         </div>
                     
