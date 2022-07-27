@@ -11,6 +11,21 @@ const Discover = () => {
         <p className='text-gray-500 font-semibold m-3 mt-4 hidden xl:block'>
             Popular Topics
         </p>
+        <div className='flex gap-3 flex-wrap'>
+            {topics.map((item) => (
+                <Link href={`/?topics=${item.name}`} key=
+                {item.name}>
+                    <div>
+                        <span>
+                            {item.icon}
+                        </span>
+                        <span>
+                            {item.name}
+                        </span>
+                    </div>
+                </Link>
+            ))}
+        </div>
     </div>
   )
 }
