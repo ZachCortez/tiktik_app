@@ -10,6 +10,20 @@ import { client } from '../utils/client';
 const Upload = () => {
     const [ isLoading, setIsLoading ] = useState(false);
     const [ videoAsset, setVideoAsset ] = useState();
+    const [ wrongFileType, setWrongFileType ] = useState(false);
+
+    const uploadVideo = async (e: any) => {
+        const selectedFile = e.target.files[0];
+        const fileTypes = ['video/mp4', 'video/webm',
+        'video/ogg'];
+
+        if(fileTypes.includes(selectedFile.type)) {
+
+        } else {
+            setIsLoading(false);
+            setWrongFileType(true);
+        }
+    }
 
     return (
         <div className='flex w-full h-full'>
@@ -61,7 +75,12 @@ const Upload = () => {
                                                 Select File
                                             </p>
                                         </div>
-                                        <input />
+                                        <input 
+                                            type="file"
+                                            name='upload-video'
+                                            onChange={uploadVideo}
+                                            className='w-0 h-0'
+                                        />
                                     </label>
                                 )}
                             </div>
