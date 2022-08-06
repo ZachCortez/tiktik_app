@@ -15,6 +15,9 @@ const Upload = () => {
     const [ videoAsset, setVideoAsset ] =
     useState<SanityAssetDocument | undefined>();
     const [ wrongFileType, setWrongFileType ] = useState(false);
+    const [ caption, setCaption ] = useState('');
+    const [ category, setCategory ] = useState(topics[0].name);
+    const [ savingPost, setSavingPost ] = useState(false);
 
     const uploadVideo = async (e: any) => {
         const selectedFile = e.target.files[0];
@@ -36,12 +39,31 @@ const Upload = () => {
         }
     }
 
+    const handlePost = async () => {
+        if(caption && videoAsset?._id && category) {
+            setSavingPost(true);
+
+            const document = {
+                _type: 'post',
+                caption,
+                video: {
+                    _type: 'file',
+                    asset: {
+                        _type: 'reference',
+                        _ref: videoAsset?._id
+                    }
+                }
+            }
+        }
+    }
+
     return (
         <div className='flex w-full h-full absolute left-0
         top-[60x] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8]
         justify-center'>
             <div className='bg-white rounded-lg xl:h-[80vh]
-            w-[60%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6'>
+            w-[60%] flex gap-6 flex-wrap justify-between
+            items-center p-14 pt-6'>
                 <div>
                     <div>
                         <p className='text-2xl font-bold'>Upload Video</p>
@@ -121,14 +143,16 @@ const Upload = () => {
                         >Caption</label>
                         <input 
                         type='text'
-                        value=''
-                        onChange={() => {}}
+                        value={caption}
+                        onChange={(e) =>
+                            setCaption(e.target.value)}
                         className='rounded outline-none text-md border-2 border-gray-200 p-2'
                         />
                         <label className='text-md font-medium'
                         >Choose a Category</label>
                         <select
-                            onChange={() => {}}
+                            onChange={(e) =>
+                                setCategory(e.target.value)}
                             className='outline-none border-2 boder-gray-200
                             text-md capitalize lg:p-4 p-2 rounded coursor-pointer'
                         >
@@ -155,7 +179,7 @@ const Upload = () => {
                                 Discard
                             </button>
                             <button
-                                onClick={() => {}}
+                                onClick={handlePost}
                                 type='button'
                                 className='bg-[#F51997] text-white border-2
                                 text-md font-medium p-2 rounded w-28
