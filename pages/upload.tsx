@@ -185,7 +185,8 @@ const Upload = () => {
                         </select>
                         <div className='flex gap-6 mt-10'>
                             <button
-                                onClick={() => {}}
+                                onClick={() =>
+                                    router.back()}
                                 type='button'
                                 className='border-gray-300 border-2
                                 text-md font-medium p-2 rounded w-28
