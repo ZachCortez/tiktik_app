@@ -147,7 +147,7 @@ const Detail = ({ postDetails }: IProps) => {
                         {userProfile && (
                             <LikeButton 
                                 likes={ post.likes }
-                                handleLike={() => handleLike=(true)}
+                                handleLike={() => handleLike(true)}
                                 handleDislike={() => handleLike(false)}
                             />
                         )}
